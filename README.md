@@ -12,3 +12,5 @@ melon: https://sketchfab.com/3d-models/3d-melon-01-d9c7f3d06d2a4e4eae0fd0cfca987
 pineapple: Gorilla tag
 
 bomb: https://sketchfab.com/3d-models/free-bomb-0151a26d36b6443092a06c92ee45aecb#download
+
+The people who made ezy-slice :pray:
