@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace FruitMonke;
+namespace FruitMonke.Behaviors;
 
 public class GameModeManager : GorillaGameManager
 {

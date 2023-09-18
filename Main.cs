@@ -5,7 +5,7 @@ using Utilla;
 namespace FruitMonke;
 
 [BepInPlugin("com.Chineesje.gorillatag.FruitMonke", "FruitMonke", "2.0.0"), BepInDependency("org.legoandmars.gorillatag.utilla", "1.5.0")]
-[ModdedGamemode("FruitMonke", "FruitMonke", typeof(GameModeManager))]
+[ModdedGamemode("FruitMonke", "FruitMonke", typeof(Behaviors.GameModeManager))]
 
 public class Main : BaseUnityPlugin
 {
