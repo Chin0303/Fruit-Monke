@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <RootNamespace>FruitMonke</RootNamespace>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+
+    <DumbMonkeGamePath>/home/crafterbot/snap/steam/common/.local/share/Steam/steamapps/common/Gorilla Tag</DumbMonkeGamePath>
+  </PropertyGroup>
+
+  <!-- References -->
+
+  <ItemGroup>
+    <Reference Include="$(DumbMonkeGamePath)/**">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Reference>
+  </ItemGroup>
+</Project>
