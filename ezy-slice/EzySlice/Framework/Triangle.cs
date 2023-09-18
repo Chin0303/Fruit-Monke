@@ -1,12 +1,14 @@
 using UnityEngine;
 
-namespace EzySlice {
+namespace EzySlice
+{
     /**
      * Represents a simple 3D Triangle structure with position
      * and UV map. The UV is required if the slicer needs
      * to recalculate the new UV position for texture mapping.
      */
-    public struct Triangle {
+    public struct Triangle
+    {
         // the points which represent this triangle
         // these have to be set and are immutable. Cannot be
         // changed once set
@@ -37,7 +39,8 @@ namespace EzySlice {
 
         public Triangle(Vector3 posa,
             Vector3 posb,
-            Vector3 posc) {
+            Vector3 posc)
+        {
             this.m_pos_a = posa;
             this.m_pos_b = posb;
             this.m_pos_c = posc;
@@ -58,23 +61,28 @@ namespace EzySlice {
             this.m_tan_c = Vector4.zero;
         }
 
-        public Vector3 positionA {
+        public Vector3 positionA
+        {
             get { return this.m_pos_a; }
         }
 
-        public Vector3 positionB {
+        public Vector3 positionB
+        {
             get { return this.m_pos_b; }
         }
 
-        public Vector3 positionC {
+        public Vector3 positionC
+        {
             get { return this.m_pos_c; }
         }
 
-        public bool hasUV {
+        public bool hasUV
+        {
             get { return this.m_uv_set; }
         }
 
-        public void SetUV(Vector2 uvA, Vector2 uvB, Vector2 uvC) {
+        public void SetUV(Vector2 uvA, Vector2 uvB, Vector2 uvC)
+        {
             this.m_uv_a = uvA;
             this.m_uv_b = uvB;
             this.m_uv_c = uvC;
@@ -82,23 +90,28 @@ namespace EzySlice {
             this.m_uv_set = true;
         }
 
-        public Vector2 uvA {
+        public Vector2 uvA
+        {
             get { return this.m_uv_a; }
         }
 
-        public Vector2 uvB {
+        public Vector2 uvB
+        {
             get { return this.m_uv_b; }
         }
 
-        public Vector2 uvC {
+        public Vector2 uvC
+        {
             get { return this.m_uv_c; }
         }
 
-        public bool hasNormal {
+        public bool hasNormal
+        {
             get { return this.m_nor_set; }
         }
 
-        public void SetNormal(Vector3 norA, Vector3 norB, Vector3 norC) {
+        public void SetNormal(Vector3 norA, Vector3 norB, Vector3 norC)
+        {
             this.m_nor_a = norA;
             this.m_nor_b = norB;
             this.m_nor_c = norC;
@@ -106,23 +119,28 @@ namespace EzySlice {
             this.m_nor_set = true;
         }
 
-        public Vector3 normalA {
+        public Vector3 normalA
+        {
             get { return this.m_nor_a; }
         }
 
-        public Vector3 normalB {
+        public Vector3 normalB
+        {
             get { return this.m_nor_b; }
         }
 
-        public Vector3 normalC {
+        public Vector3 normalC
+        {
             get { return this.m_nor_c; }
         }
 
-        public bool hasTangent {
+        public bool hasTangent
+        {
             get { return this.m_tan_set; }
         }
 
-        public void SetTangent(Vector4 tanA, Vector4 tanB, Vector4 tanC) {
+        public void SetTangent(Vector4 tanA, Vector4 tanB, Vector4 tanC)
+        {
             this.m_tan_a = tanA;
             this.m_tan_b = tanB;
             this.m_tan_c = tanC;
@@ -130,15 +148,18 @@ namespace EzySlice {
             this.m_tan_set = true;
         }
 
-        public Vector4 tangentA {
+        public Vector4 tangentA
+        {
             get { return this.m_tan_a; }
         }
 
-        public Vector4 tangentB {
+        public Vector4 tangentB
+        {
             get { return this.m_tan_b; }
         }
 
-        public Vector4 tangentC {
+        public Vector4 tangentC
+        {
             get { return this.m_tan_c; }
         }
 
@@ -146,9 +167,11 @@ namespace EzySlice {
          * Compute and set the tangents of this triangle
          * Derived From https://answers.unity.com/questions/7789/calculating-tangents-vector4.html
          */
-        public void ComputeTangents() {
+        public void ComputeTangents()
+        {
             // computing tangents requires both UV and normals set
-            if (!m_nor_set || !m_uv_set) {
+            if (!m_nor_set || !m_uv_set)
+            {
                 return;
             }
 
@@ -203,7 +226,8 @@ namespace EzySlice {
          * Calculate the Barycentric coordinate weight values u-v-w for Point p in respect to the provided
          * triangle. This is useful for computing new UV coordinates for arbitrary points.
          */
-        public Vector3 Barycentric(Vector3 p) {
+        public Vector3 Barycentric(Vector3 p)
+        {
             Vector3 a = m_pos_a;
             Vector3 b = m_pos_b;
             Vector3 c = m_pos_c;
@@ -219,19 +243,24 @@ namespace EzySlice {
             float z = Mathf.Abs(m.z);
 
             // compute areas of plane with largest projections
-            if (x >= y && x >= z) {
+            if (x >= y && x >= z)
+            {
                 // area of PBC in yz plane
                 nu = Intersector.TriArea2D(p.y, p.z, b.y, b.z, c.y, c.z);
                 // area of PCA in yz plane
                 nv = Intersector.TriArea2D(p.y, p.z, c.y, c.z, a.y, a.z);
                 // 1/2*area of ABC in yz plane
                 ood = 1.0f / m.x;
-            } else if (y >= x && y >= z) {
+            }
+            else if (y >= x && y >= z)
+            {
                 // project in xz plane
                 nu = Intersector.TriArea2D(p.x, p.z, b.x, b.z, c.x, c.z);
                 nv = Intersector.TriArea2D(p.x, p.z, c.x, c.z, a.x, a.z);
                 ood = 1.0f / -m.y;
-            } else {
+            }
+            else
+            {
                 // project in xy plane
                 nu = Intersector.TriArea2D(p.x, p.y, b.x, b.y, c.x, c.y);
                 nv = Intersector.TriArea2D(p.x, p.y, c.x, c.y, a.x, a.y);
@@ -251,9 +280,11 @@ namespace EzySlice {
          * Uses weight values for the computation, so this triangle must have UV's set to return
          * the correct results. Otherwise Vector2.zero will be returned. check via hasUV().
          */
-        public Vector2 GenerateUV(Vector3 pt) {
+        public Vector2 GenerateUV(Vector3 pt)
+        {
             // if not set, result will be zero, quick exit
-            if (!m_uv_set) {
+            if (!m_uv_set)
+            {
                 return Vector2.zero;
             }
 
@@ -268,9 +299,11 @@ namespace EzySlice {
          * Uses weight values for the computation, so this triangle must have Normal's set to return
          * the correct results. Otherwise Vector3.zero will be returned. check via hasNormal().
          */
-        public Vector3 GenerateNormal(Vector3 pt) {
+        public Vector3 GenerateNormal(Vector3 pt)
+        {
             // if not set, result will be zero, quick exit
-            if (!m_nor_set) {
+            if (!m_nor_set)
+            {
                 return Vector3.zero;
             }
 
@@ -285,9 +318,11 @@ namespace EzySlice {
          * Uses weight values for the computation, so this triangle must have Tangent's set to return
          * the correct results. Otherwise Vector4.zero will be returned. check via hasTangent().
          */
-        public Vector4 GenerateTangent(Vector3 pt) {
+        public Vector4 GenerateTangent(Vector3 pt)
+        {
             // if not set, result will be zero, quick exit
-            if (!m_nor_set) {
+            if (!m_nor_set)
+            {
                 return Vector4.zero;
             }
 
@@ -301,7 +336,8 @@ namespace EzySlice {
          * the results inside the IntersectionResult structure.
          * Returns true on success or false otherwise
          */
-        public bool Split(Plane pl, IntersectionResult result) {
+        public bool Split(Plane pl, IntersectionResult result)
+        {
             Intersector.Intersect(pl, this, result);
 
             return result.isValid;
@@ -310,7 +346,8 @@ namespace EzySlice {
         /**
          * Check the triangle winding order, if it's Clock Wise or Counter Clock Wise 
          */
-        public bool IsCW() {
+        public bool IsCW()
+        {
             return SignedSquare(m_pos_a, m_pos_b, m_pos_c) >= float.Epsilon;
         }
 
@@ -318,7 +355,8 @@ namespace EzySlice {
          * Returns the Signed square of a given triangle, useful for checking the
          * winding order
          */
-        public static float SignedSquare(Vector3 a, Vector3 b, Vector3 c) {
+        public static float SignedSquare(Vector3 a, Vector3 b, Vector3 c)
+        {
             return (a.x * (b.y * c.z - b.z * c.y) -
                 a.y * (b.x * c.z - b.z * c.x) +
                 a.z * (b.x * c.y - b.y * c.x));
@@ -328,11 +366,13 @@ namespace EzySlice {
          * Editor only DEBUG functionality. This should not be compiled in the final
          * Version.
          */
-        public void OnDebugDraw() {
+        public void OnDebugDraw()
+        {
             OnDebugDraw(Color.white);
         }
 
-        public void OnDebugDraw(Color drawColor) {
+        public void OnDebugDraw(Color drawColor)
+        {
 #if UNITY_EDITOR
             Color prevColor = Gizmos.color;
 

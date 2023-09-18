@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace EzySlice {
+namespace EzySlice
+{
 
     /**
      * A Basic Structure which contains intersection information
@@ -11,7 +12,8 @@ namespace EzySlice {
      * via an optional indices array. Could lead for a faster
      * intersection test aswell.
      */
-    public sealed class IntersectionResult {
+    public sealed class IntersectionResult
+    {
 
         // general tag to check if this structure is valid
         private bool is_success;
@@ -26,7 +28,8 @@ namespace EzySlice {
         private int lower_hull_count;
         private int intersection_pt_count;
 
-        public IntersectionResult() {
+        public IntersectionResult()
+        {
             this.is_success = false;
 
             this.upper_hull = new Triangle[2];
@@ -38,31 +41,38 @@ namespace EzySlice {
             this.intersection_pt_count = 0;
         }
 
-        public Triangle[] upperHull {
+        public Triangle[] upperHull
+        {
             get { return upper_hull; }
         }
 
-        public Triangle[] lowerHull {
+        public Triangle[] lowerHull
+        {
             get { return lower_hull; }
         }
 
-        public Vector3[] intersectionPoints {
+        public Vector3[] intersectionPoints
+        {
             get { return intersection_pt; }
         }
 
-        public int upperHullCount {
+        public int upperHullCount
+        {
             get { return upper_hull_count; }
         }
 
-        public int lowerHullCount {
+        public int lowerHullCount
+        {
             get { return lower_hull_count; }
         }
 
-        public int intersectionPointCount {
+        public int intersectionPointCount
+        {
             get { return intersection_pt_count; }
         }
 
-        public bool isValid {
+        public bool isValid
+        {
             get { return is_success; }
         }
 
@@ -70,7 +80,8 @@ namespace EzySlice {
          * Used by the intersector, adds a new triangle to the
          * upper hull section
          */
-        public IntersectionResult AddUpperHull(Triangle tri) {
+        public IntersectionResult AddUpperHull(Triangle tri)
+        {
             upper_hull[upper_hull_count++] = tri;
 
             is_success = true;
@@ -82,7 +93,8 @@ namespace EzySlice {
          * Used by the intersector, adds a new triangle to the
          * lower gull section
          */
-        public IntersectionResult AddLowerHull(Triangle tri) {
+        public IntersectionResult AddLowerHull(Triangle tri)
+        {
             lower_hull[lower_hull_count++] = tri;
 
             is_success = true;
@@ -94,14 +106,16 @@ namespace EzySlice {
          * Used by the intersector, adds a new intersection point
          * which is shared by both upper->lower hulls
          */
-        public void AddIntersectionPoint(Vector3 pt) {
+        public void AddIntersectionPoint(Vector3 pt)
+        {
             intersection_pt[intersection_pt_count++] = pt;
         }
 
         /**
          * Clear the current state of this object 
          */
-        public void Clear() {
+        public void Clear()
+        {
             is_success = false;
             upper_hull_count = 0;
             lower_hull_count = 0;
@@ -112,11 +126,13 @@ namespace EzySlice {
          * Editor only DEBUG functionality. This should not be compiled in the final
          * Version.
          */
-        public void OnDebugDraw() {
+        public void OnDebugDraw()
+        {
             OnDebugDraw(Color.white);
         }
 
-        public void OnDebugDraw(Color drawColor) {
+        public void OnDebugDraw(Color drawColor)
+        {
 #if UNITY_EDITOR
 
             if (!isValid) {

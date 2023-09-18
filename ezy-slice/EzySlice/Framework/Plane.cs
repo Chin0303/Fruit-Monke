@@ -2,14 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace EzySlice {
+namespace EzySlice
+{
 
     /**
      * Quick Internal structure which checks where the point lays on the
      * Plane. UP = Upwards from the Normal, DOWN = Downwards from the Normal
      * ON = Point lays straight on the plane
      */
-    public enum SideOfPlane {
+    public enum SideOfPlane
+    {
         UP,
         DOWN,
         ON
@@ -20,7 +22,8 @@ namespace EzySlice {
      * and direction which extends infinitely in its axis. This provides
      * an optimal structure for collision tests for the slicing framework.
      */
-    public struct Plane {
+    public struct Plane
+    {
         private Vector3 m_normal;
         private float m_dist;
 
@@ -31,7 +34,8 @@ namespace EzySlice {
         private Transform trans_ref;
 #endif
 
-        public Plane(Vector3 pos, Vector3 norm) {
+        public Plane(Vector3 pos, Vector3 norm)
+        {
             this.m_normal = norm;
             this.m_dist = Vector3.Dot(norm, pos);
 
@@ -41,7 +45,8 @@ namespace EzySlice {
 #endif
         }
 
-        public Plane(Vector3 norm, float dot) {
+        public Plane(Vector3 norm, float dot)
+        {
             this.m_normal = norm;
             this.m_dist = dot;
 
@@ -50,23 +55,26 @@ namespace EzySlice {
             trans_ref = null;
 #endif
         }
-        
-        public Plane(Vector3 a, Vector3 b, Vector3 c) {
+
+        public Plane(Vector3 a, Vector3 b, Vector3 c)
+        {
             m_normal = Vector3.Normalize(Vector3.Cross(b - a, c - a));
             m_dist = -Vector3.Dot(m_normal, a);
-            
+
             // this is for editor debugging only!
 #if UNITY_EDITOR
             trans_ref = null;
 #endif
         }
 
-        public void Compute(Vector3 pos, Vector3 norm) {
+        public void Compute(Vector3 pos, Vector3 norm)
+        {
             this.m_normal = norm;
             this.m_dist = Vector3.Dot(norm, pos);
         }
 
-        public void Compute(Transform trans) {
+        public void Compute(Transform trans)
+        {
             Compute(trans.position, trans.up);
 
             // this is for editor debugging only!
@@ -75,29 +83,35 @@ namespace EzySlice {
 #endif
         }
 
-        public void Compute(GameObject obj) {
+        public void Compute(GameObject obj)
+        {
             Compute(obj.transform);
         }
 
-        public Vector3 normal {
+        public Vector3 normal
+        {
             get { return this.m_normal; }
         }
 
-        public float dist {
+        public float dist
+        {
             get { return this.m_dist; }
         }
 
         /**
          * Checks which side of the plane the point lays on.
          */
-        public SideOfPlane SideOf(Vector3 pt) {
+        public SideOfPlane SideOf(Vector3 pt)
+        {
             float result = Vector3.Dot(m_normal, pt) - m_dist;
 
-            if (result > Intersector.Epsilon) {
+            if (result > Intersector.Epsilon)
+            {
                 return SideOfPlane.UP;
             }
 
-            if (result < -Intersector.Epsilon) {
+            if (result < -Intersector.Epsilon)
+            {
                 return SideOfPlane.DOWN;
             }
 
@@ -108,11 +122,13 @@ namespace EzySlice {
          * Editor only DEBUG functionality. This should not be compiled in the final
          * Version.
          */
-        public void OnDebugDraw() {
+        public void OnDebugDraw()
+        {
             OnDebugDraw(Color.white);
         }
 
-        public void OnDebugDraw(Color drawColor) {
+        public void OnDebugDraw(Color drawColor)
+        {
             // NOTE -> Gizmos are only supported in the editor. We will keep these function
             // signatures for consistancy however at final build, these will do nothing
             // TO/DO -> Should we throw a runtime exception if this function tried to get executed
