@@ -10,8 +10,8 @@ This product is not affiliated with Gorilla Tag or Another Axiom LLC and is not 
 [banana](https://sketchfab.com/3d-models/banana-1b6f7a19b53c4f50ad4e24620e594dbd)
 [melon](https://sketchfab.com/3d-models/3d-melon-01-d9c7f3d06d2a4e4eae0fd0cfca9870aa)
 
-pineapple: Gorilla tag
-
 [bomb](https://sketchfab.com/3d-models/free-bomb-0151a26d36b6443092a06c92ee45aecb#download)
+
+pineapple: Gorilla tag
 
 The people who made ezy-slice :pray:
