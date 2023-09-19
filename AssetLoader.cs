@@ -5,7 +5,7 @@ namespace FruitMonke;
 
 public static class AssetLoader
 {
-    private const string ResourcePath = "";
+    private const string ResourcePath = "FruitMonke.Resources.fruitbundle";
 
     private static AssetBundle CachedBundle;
     private static Dictionary<string, UnityEngine.Object> CachedAssets = new Dictionary<string, UnityEngine.Object>();
